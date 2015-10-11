@@ -1,0 +1,6 @@
+df <- read.csv("household_power_consumption.txt", sep=";", na.strings="?", colClasses=c(rep("character", 2),rep("numeric",7)))
+plotDf <- subset(df, Date == "1/2/2007" | Date == "2/2/2007")
+plotDf$Timestamp <- with(plotDf, strptime(paste(Date, Time), "%d/%m/%Y %H:%M:%S"))
+png("plot2.png", width=480, height=480)
+with(plotDf, plot(Timestamp, Global_active_power, ylab="Global Active Power (kilowatts)", xlab="", type="l"))
+dev.off()
